@@ -9,7 +9,7 @@ class DIApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@DIApplication)
-            modules(StorageModul.storageModule)
+            modules(listOf(StorageModul.storageModule, StorageModul.networkModule))
         }
     }
 }
