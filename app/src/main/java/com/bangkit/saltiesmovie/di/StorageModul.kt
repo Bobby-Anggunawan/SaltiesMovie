@@ -13,6 +13,8 @@ import com.bangkit.saltiesmovie.core.domainlayer.usecase.UseCase
 import com.bangkit.saltiesmovie.presentation.viewmodel.DetailFragmentVM
 import com.bangkit.saltiesmovie.presentation.viewmodel.DiscoverFragmentVM
 import com.google.gson.Gson
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -29,15 +31,6 @@ object StorageModul {
 
         fun provideUseCase(repo: SaltiesRepository): UseCase{
             return SaltiesInteractor(repo)
-        }
-
-        fun provideDB(context: Context): MyDB.MyDao{
-            val db = Room.databaseBuilder(
-                context,
-                MyDB.AppDatabase::class.java, "SaltiesDB"
-            ).build()
-
-            return db.saltiesDao()
         }
 
         single {
@@ -65,10 +58,6 @@ object StorageModul {
             provideUseCase(get())
         }
 
-        single{
-            provideDB(get())
-        }
-
         viewModel {
             DetailFragmentVM(get())
         }
@@ -94,5 +83,28 @@ object StorageModul {
                 .certificatePinner(certificatePinner)
                 .build()
         }
+    }
+
+    val DBModule = module{
+        fun provideDB(context: Context): MyDB.MyDao{
+            val passphrase: ByteArray = SQLiteDatabase.getBytes("BangkitJagawana".toCharArray())
+            val factory = SupportFactory(passphrase)
+
+            val db = Room.databaseBuilder(
+                context,
+                MyDB.AppDatabase::class.java, "Salties.db"
+            )
+                .fallbackToDestructiveMigration()
+                .openHelperFactory(factory)
+                .build()
+
+            return db.saltiesDao()
+        }
+
+        single{
+            provideDB(get())
+        }
+
+
     }
 }

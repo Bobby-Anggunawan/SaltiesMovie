@@ -27,13 +27,14 @@ class DiscoverFragment : Fragment() {
 
     val myViewModel: DiscoverFragmentVM by viewModel()
 
-    private lateinit var binding: FragmentDiscoverBinding
+    private var _binding: FragmentDiscoverBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDiscoverBinding.inflate(layoutInflater)
+        _binding = FragmentDiscoverBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -60,6 +61,13 @@ class DiscoverFragment : Fragment() {
             }
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        binding.listDisover.adapter = null
+        _binding = null
     }
 
 }

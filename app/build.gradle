@@ -57,4 +57,7 @@ dependencies {
     api("androidx.navigation:navigation-fragment-ktx:2.3.5")
     api("androidx.navigation:navigation-ui-ktx:2.3.5")
     api("androidx.navigation:navigation-dynamic-features-fragment:2.3.5")
+
+    //LeakCanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }

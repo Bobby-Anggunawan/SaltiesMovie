@@ -26,4 +26,8 @@ dependencies{
 
     //cachein viewmodel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+
+    //SQLCipher
+    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
+    implementation "androidx.sqlite:sqlite-ktx:2.1.0"
 }
