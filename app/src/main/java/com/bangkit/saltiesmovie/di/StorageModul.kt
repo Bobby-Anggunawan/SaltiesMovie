@@ -2,9 +2,10 @@ package com.bangkit.saltiesmovie.di
 
 import android.content.Context
 import androidx.room.Room
-import com.bangkit.saltiesmovie.core.datalayer.datasource.MyDB
 import com.bangkit.saltiesmovie.core.datalayer.repository.DiscoverPagingData
 import com.bangkit.saltiesmovie.core.datalayer.datasource.RemoteDataSource
+import com.bangkit.saltiesmovie.core.datalayer.datasource.room.AppDatabase
+import com.bangkit.saltiesmovie.core.datalayer.datasource.room.MyDao
 import com.bangkit.saltiesmovie.core.datalayer.repository.FavoritePagingSource
 import com.bangkit.saltiesmovie.core.datalayer.repository.RepositoryImplementation
 import com.bangkit.saltiesmovie.core.domainlayer.repository.SaltiesRepository
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit
 object StorageModul {
     val storageModule = module {
 
-        fun provideRepository(remoteDataSource: RemoteDataSource, ps: DiscoverPagingData, psFav: FavoritePagingSource, db: MyDB.MyDao): SaltiesRepository{
+        fun provideRepository(remoteDataSource: RemoteDataSource, ps: DiscoverPagingData, psFav: FavoritePagingSource, db: MyDao): SaltiesRepository{
             return RepositoryImplementation(remoteDataSource, ps, psFav, db)
         }
 
@@ -86,13 +87,13 @@ object StorageModul {
     }
 
     val DBModule = module{
-        fun provideDB(context: Context): MyDB.MyDao{
+        fun provideDB(context: Context): MyDao {
             val passphrase: ByteArray = SQLiteDatabase.getBytes("BangkitJagawana".toCharArray())
             val factory = SupportFactory(passphrase)
 
             val db = Room.databaseBuilder(
                 context,
-                MyDB.AppDatabase::class.java, "Salties.db"
+                AppDatabase::class.java, "Salties.db"
             )
                 .fallbackToDestructiveMigration()
                 .openHelperFactory(factory)

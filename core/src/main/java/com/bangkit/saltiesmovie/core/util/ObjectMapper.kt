@@ -1,11 +1,10 @@
 package com.bangkit.saltiesmovie.core.util
 
-import com.bangkit.saltiesmovie.core.datalayer.datasource.MyDB
+import com.bangkit.saltiesmovie.core.datalayer.model.Movie
 import com.bangkit.saltiesmovie.core.datalayer.model.MovieDetailDataMod
 import com.bangkit.saltiesmovie.core.datalayer.model.MoviePageDataMod
 import com.bangkit.saltiesmovie.core.domainlayer.model.MovieDetailDomainMod
 import com.bangkit.saltiesmovie.core.domainlayer.model.MoviePageDomainMod
-import kotlin.reflect.typeOf
 
 
 object ObjectMapper {
@@ -47,11 +46,11 @@ object ObjectMapper {
         return alist
     }
 
-    fun MovieDetailDomainMod_MovieDB(source: MovieDetailDomainMod): MyDB.Movie{
-        return MyDB.Movie(source.id, source.backdrop_path, source.budget, source.homepage, source.original_title, source.overview, source.poster_path, source.release_date, source.revenue, source.status, source.tagline, source.vote_average, source.vote_count)
+    fun MovieDetailDomainMod_MovieDB(dataSource: MovieDetailDomainMod): Movie{
+        return Movie(dataSource.id, dataSource.backdrop_path, dataSource.budget, dataSource.homepage, dataSource.original_title, dataSource.overview, dataSource.poster_path, dataSource.release_date, dataSource.revenue, dataSource.status, dataSource.tagline, dataSource.vote_average, dataSource.vote_count)
     }
 
-    fun MovieDB_MoviePageDomainMod(source: MyDB.Movie): MoviePageDomainMod{
-        return MoviePageDomainMod(false, source.backdrop_path, arrayListOf(), source.id, "En", source.original_title, source.overview, 1.1, source.poster_path, source.release_date, source.original_title, false, source.vote_average, source.vote_count)
+    fun MovieDB_MoviePageDomainMod(dataSource: Movie): MoviePageDomainMod{
+        return MoviePageDomainMod(false, dataSource.backdrop_path, arrayListOf(), dataSource.id, "En", dataSource.original_title, dataSource.overview, 1.1, dataSource.poster_path, dataSource.release_date, dataSource.original_title, false, dataSource.vote_average, dataSource.vote_count)
     }
 }

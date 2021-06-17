@@ -3,15 +3,14 @@ package com.bangkit.saltiesmovie.core.datalayer.repository
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.bangkit.saltiesmovie.core.datalayer.datasource.MyDB
+import com.bangkit.saltiesmovie.core.datalayer.datasource.room.MyDao
 import com.bangkit.saltiesmovie.core.domainlayer.model.MoviePageDomainMod
-import com.bangkit.saltiesmovie.core.util.JsonMapper
 import com.bangkit.saltiesmovie.core.util.ObjectMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 @Suppress("BlockingMethodInNonBlockingContext")
-class FavoritePagingSource(val db: MyDB.MyDao) : PagingSource<Int, MoviePageDomainMod>() {
+class FavoritePagingSource(val db: MyDao) : PagingSource<Int, MoviePageDomainMod>() {
     override suspend fun load(
         params: LoadParams<Int>
     ): LoadResult<Int, MoviePageDomainMod> {

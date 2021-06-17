@@ -3,21 +3,19 @@ package com.bangkit.saltiesmovie.core.datalayer.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.bangkit.saltiesmovie.core.datalayer.datasource.MyDB
 import com.bangkit.saltiesmovie.core.datalayer.datasource.RemoteDataSource
+import com.bangkit.saltiesmovie.core.datalayer.datasource.room.MyDao
 import com.bangkit.saltiesmovie.core.datalayer.model.MovieDetailDataMod
 import com.bangkit.saltiesmovie.core.domainlayer.model.MovieDetailDomainMod
 import com.bangkit.saltiesmovie.core.domainlayer.model.MoviePageDomainMod
 import com.bangkit.saltiesmovie.core.domainlayer.repository.SaltiesRepository
 import com.bangkit.saltiesmovie.core.util.JsonMapper
 import com.bangkit.saltiesmovie.core.util.ObjectMapper
-import com.google.gson.Gson
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import okhttp3.Dispatcher
 
-class RepositoryImplementation constructor(val remote: RemoteDataSource, val discoverPS: DiscoverPagingData, val favoritePS: FavoritePagingSource, val db: MyDB.MyDao): SaltiesRepository {
+class RepositoryImplementation constructor(val remote: RemoteDataSource, val discoverPS: DiscoverPagingData, val favoritePS: FavoritePagingSource, val db: MyDao): SaltiesRepository {
     override fun getDiscoverPagingData(): Flow<PagingData<MoviePageDomainMod>> {
         return Pager(
             PagingConfig(pageSize = 20)
