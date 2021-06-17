@@ -30,4 +30,7 @@ dependencies{
     //SQLCipher
     implementation "net.zetetic:android-database-sqlcipher:4.4.0"
     implementation "androidx.sqlite:sqlite-ktx:2.1.0"
+
+    //multidex(dynamic feature after obfucation error without it)
+    implementation "androidx.multidex:multidex:2.0.1"
 }

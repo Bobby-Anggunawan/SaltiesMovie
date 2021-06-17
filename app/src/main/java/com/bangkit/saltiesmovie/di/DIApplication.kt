@@ -1,10 +1,11 @@
 package com.bangkit.saltiesmovie.di
 
 import android.app.Application
+import androidx.multidex.MultiDexApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class DIApplication : Application() {
+class DIApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         startKoin {

@@ -25,8 +25,6 @@ class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
-    val myViewModel: FavoriteFragmentVM by viewModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadKoinModules(StorageModul.favoriteModul)
@@ -53,6 +51,7 @@ class FavoriteFragment : Fragment() {
         )
         binding.listDisover.adapter = myAdapter
         binding.listDisover.layoutManager = StaggeredGridLayoutManager( 3, StaggeredGridLayoutManager.VERTICAL)
+        val myViewModel: FavoriteFragmentVM by viewModel()
         viewLifecycleOwner.lifecycleScope.launch {
             myViewModel.pagingData.collectLatest {
                 myAdapter.submitData(viewLifecycleOwner.lifecycle, it)
