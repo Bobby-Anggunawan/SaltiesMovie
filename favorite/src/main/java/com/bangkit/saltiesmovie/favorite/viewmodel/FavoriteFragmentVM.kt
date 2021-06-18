@@ -6,5 +6,5 @@ import androidx.paging.cachedIn
 import com.bangkit.saltiesmovie.core.domainlayer.usecase.UseCase
 
 class FavoriteFragmentVM(val repo: UseCase): ViewModel() {
-    val pagingData = repo.getFavoritePaging().cachedIn(viewModelScope)
+    val pagingData = repo.getFavoritePaging()
 }
